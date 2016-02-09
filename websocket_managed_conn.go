@@ -416,4 +416,5 @@ var eventMapping = map[string]interface{}{
 
 	"reaction_added":   ReactionAddedEvent{},
 	"reaction_removed": ReactionRemovedEvent{},
+	"reconnect_url":    ReconnectUrlEvent{},
 }
