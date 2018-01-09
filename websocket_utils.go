@@ -3,8 +3,6 @@ package slack
 import (
 	"fmt"
 	"log"
-	"net"
-	"net/url"
 	"strconv"
 	"time"
 )
@@ -24,18 +22,4 @@ func (t JSONTimeString) String() string {
 	timeStr := int64(floatN)
 	tm := time.Unix(int64(timeStr), 0)
 	return fmt.Sprintf("\"%s\"", tm.Format("Mon Jan _2"))
-}
-
-var portMapping = map[string]string{"ws": "80", "wss": "443"}
-
-func websocketizeUrlPort(orig string) (string, error) {
-	urlObj, err := url.ParseRequestURI(orig)
-	if err != nil {
-		return "", err
-	}
-	_, _, err = net.SplitHostPort(urlObj.Host)
-	if err != nil {
-		return urlObj.Scheme + "://" + urlObj.Host + ":" + portMapping[urlObj.Scheme] + urlObj.Path, nil
-	}
-	return orig, nil
 }
